@@ -3,10 +3,12 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import Scream from '../components/Scream'
 
+
+
 class Home extends Component {
 
     state = {
-        screams: null
+        screams: []
     }
 
     componentDidMount(){
@@ -18,8 +20,9 @@ class Home extends Component {
     }
 
     render() {
+      
         let recentScreamsMarkup = this.state.screams ? (
-            this.state.screams.map(post => <Scream scream={post} />)
+            this.state.screams.map(post => <Scream key={post.screemId} scream={post} />)
         ): <p>Loading...</p>
         console.log(this.state.screams)
         return (
