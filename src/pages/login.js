@@ -7,6 +7,10 @@ import {Typography} from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
+import Link from 'react-router-dom/Link'
+import {CircularProgress} from '@material-ui/core'
+
+
 
 const styles =  {
     form : {
@@ -23,8 +27,22 @@ const styles =  {
     },
     button: {
         marginTop: 20,
+        position: 'relative'
+
+    },
+    customError:{
+        color: 'red',
+        fontSize: '0.8rem',
+        marginTop: 10
+    },
+    small : {
+        margin: 10
+    },
+    progress: {
+        position: 'absoluate'
 
     }
+    
 
 }
 
@@ -37,7 +55,7 @@ class login extends Component {
         email: "",
         password: "",
         loading: false,
-        error: {}
+        errors: {}
     }
 
 
@@ -51,7 +69,9 @@ class login extends Component {
         }
         axios.post('/login', userData )
         .then(res => {
+            localStorage.setItem('IdToken', `Bearer ${res.data.token}`);
             this.setState({loading:false})
+            this.props.history.push('/')
         })
         .catch(err => {
             this.setState({error:err.response.data, loading:false})
@@ -70,20 +90,52 @@ class login extends Component {
 
     render() {
         const {classes} = this.props 
+        const {errors, loading} = this.state
         return (
            <Grid container className={classes.form}>
                <Grid item sm />
                <Grid item sm>
-                    <img src={AppIcon} alt="monkey" width="50%" height="70%" className={classes.image} />
+                    <img src={AppIcon} alt="monkey" width="50%" height="50%" className={classes.image} />
                     <Typography variant="h4" className={classes.pageTitle}>Login</Typography>
                     <form noValidate onSubmit={this.handleSubmit}>
-                        <TextField id="email" name="email" type="email" label="Email" className={classes.textField}
-                        value={this.state.email} onChange={this.hangleChange} fullWidth />
-                    
-                    <TextField id="password" name="password" type="password" label="Password" className={classes.textField}
-                        value={this.state.password} onChange={this.hangleChange} fullWidth />
-                    <Button type="submit" variant="contained" color="primary" className={classes.button}>Submit</Button>
+                        <TextField
+                         id="email"
+                         name="email"
+                          type="email"
+                           label="Email"
+                            className={classes.textField}
 
+                        value={this.state.email}
+                         onChange={this.hangleChange}
+                         helperText={errors.email}
+                         error={errors.email ? true: false}
+                          fullWidth />
+                    
+                    <TextField
+                     id="password"
+                      name="password"
+                       type="password"
+                        label="Password"
+                         className={classes.textField}
+                        value={this.state.password}
+                         onChange={this.hangleChange}
+                         helperText={errors.password}
+                         error={errors.password ? true: false}
+                          fullWidth />
+
+                    {errors.general && (
+                        <Typography variant="body2" className={classes.customError}>
+                            {errors.general}
+                        </Typography>
+                    )}
+                    <Button type="submit" variant="contained" color="primary" disabled={loading}  className={classes.button}>
+                        Login 
+                        {loading && (
+                            <CircularProgress size={30} className={classes.progress} />
+                        )}
+                        </Button>
+                    <br />
+                    <small className="small" >Don't have an account ? don't worry Sign Up <Link to="/signup">Here</Link>  </small>
                     </form>
                </Grid>
                <Grid item sm />

@@ -9,6 +9,8 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import jwtDecode from 'jwt-decode'
+import AuthRoute from './utils/authRoute'
 
 
 
@@ -33,6 +35,20 @@ const theme = createMuiTheme({
   }
 
 })
+
+let authenticated;
+
+const token = localStorage.IdToken
+if(token) {
+  const decodedToken = jwtDecode(token);
+  if(decodedToken * 1000 < Date.now()) {
+    window.location.href = '/login'
+    authenticated = false
+  }else {
+    authenticated = true
+  }
+
+}
 
 
 function App() {
