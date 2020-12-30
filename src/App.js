@@ -41,6 +41,7 @@ let authenticated;
 const token = localStorage.IdToken
 if(token) {
   const decodedToken = jwtDecode(token);
+  console.log(decodedToken)
   if(decodedToken * 1000 < Date.now()) {
     window.location.href = '/login'
     authenticated = false
@@ -61,8 +62,8 @@ function App() {
          
        <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact  path="/signup" component={Signup} />
-       <Route exact  path="/login" component={login} />
+        <AuthRoute exact  path="/signup" component={Signup} authenticated={authenticated} />
+       <AuthRoute exact  path="/login" component={login} authenticated={authenticated} />
        
        </Switch>
        </div>
