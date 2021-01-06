@@ -9,8 +9,8 @@ import Button from '@material-ui/core/Button'
 import axios from 'axios'
 import Link from 'react-router-dom/Link'
 import {CircularProgress} from '@material-ui/core'
-
-
+import {connect} from 'react-redux'
+import {authLogin} from '../store/actions/user'
 
 const styles =  {
     form : {
@@ -59,25 +59,11 @@ class login extends Component {
     }
 
 
+
     handleSubmit = (e) => {
         const {email, password} =  this.state
         e.preventDefault()
-        this.setState({loading:true})
-        const userData = {
-            email: email,
-            password: password
-        }
-        axios.post('/login', userData )
-        .then(res => {
-            console.log(res.data)
-            localStorage.setItem('IdToken', `Bearer ${res.data.token}`);
-            this.setState({loading:false})
-            this.props.history.push('/')
-        })
-        .catch(err => {
-            this.setState({error:err.response.data, loading:false})
-
-        })
+        this.props.login(email, password)
         
         
     }
@@ -149,4 +135,17 @@ login.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(login)
+const mapStateToProps = (state) => {
+    return {
+        auth: state.user.token
+    }
+}
+
+const mapDispatchToProps  = dispatch => {
+    return {
+        login: (email, password) => dispatch(authLogin(email, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(login))
+

@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button'
 import axios from 'axios'
 import Link from 'react-router-dom/Link'
 import {CircularProgress} from '@material-ui/core'
+import {SignUP} from '../store/actions/user'
+import {connect} from 'react-redux'
 
 
 
@@ -64,24 +66,7 @@ class signup extends Component {
     handleSubmit = (e) => {
         const {email, password, confirmPassword, handle} =  this.state
         e.preventDefault()
-        this.setState({loading:true})
-        const newUser = {
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-            handle: handle
-
-        }
-        axios.post('/signup', newUser )
-        .then(res => {
-            localStorage.setItem('IdToken', `Bearer ${res.data.token}`);
-            this.setState({loading:false})
-            this.props.history.push('/')
-        })
-        .catch(err => {
-            this.setState({error:err.response.data, loading:false})
-
-        })
+        this.props.signup(email, password, confirmPassword, handle)
         
         
     }
@@ -176,4 +161,16 @@ signup.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(signup)
+const mapStateToProps = (state) => {
+    return {
+        auth: state.user.token
+    }
+}
+
+const mapDispatchToProps  = dispatch => {
+    return {
+        signup: (email, password, confirmPassword, handle) => dispatch(SignUP(email, password, confirmPassword, handle))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(signup))

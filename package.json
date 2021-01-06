@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "dayjs": "^1.9.8",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.1",
@@ -44,5 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://us-central1-socialapp-78005.cloudfunctions.net/api"
+  "proxy": "http://localhost:5000/socialapp-78005/us-central1/api"
 }

@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose ,createStore } from 'redux';
 import thunk from 'redux-thunk';
-import thunk from 'redux-thunk'
+import userReducer from './store/reducers/user'
+import dataReducer from './store/reducers/data'
 
 
 const rootReducers= combineReducers({
+  user: userReducer,
+  data: dataReducer
+
   
 })
 

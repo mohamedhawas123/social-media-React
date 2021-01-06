@@ -2,8 +2,9 @@ import { Grid } from '@material-ui/core'
 import React, {Component} from 'react'
 import axios from 'axios'
 import Scream from '../components/Scream'
-
-
+import {fetchData} from '../store/actions/data'
+import {connect} from 'react-redux'
+import Profile from '../components/profile'
 
 class Home extends Component {
 
@@ -17,9 +18,14 @@ class Home extends Component {
             this.setState({screams: res.data})
         })
         .catch(err => console.log(err))
+
+        this.props.fetch()
+
+
     }
 
     render() {
+        console.log(this.props.data)
       
         let recentScreamsMarkup = this.state.screams ? (
             this.state.screams.map(post => <Scream key={post.screemId} scream={post} />)
@@ -32,11 +38,23 @@ class Home extends Component {
                </Grid>
 
                <Grid item sm={4} xs={12}>
-                   <p>Profile...</p>
+                    <Profile />
                </Grid>
            </Grid>
         )
     }
 }
 
-export default Home
+const mapStateToProps = (state) => {
+    return {
+        data: state.data.data
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetch: () => dispatch(fetchData())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
