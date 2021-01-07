@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import * as actionTypes from './actionTypy'
 import { instance } from './token'
@@ -11,7 +12,7 @@ const dataStart = () => {
 const dataSucess = data => {
     return {
         type: actionTypes.DATA_SUCESS,
-        data: data
+        data
     }
 }
 
@@ -39,5 +40,18 @@ export const fetchData = () => {
             dispatch(dataFail(err))
         })
 
+    }
+}
+
+export const uploadPic = (formData) => {
+    return dispatch => {
+        dispatch(dataStart())
+        instance.post('/user/image', formData)
+        .then(res => {
+            dispatch(fetchData())
+        })
+        .catch(err => {
+            dispatch(dataFail(err))
+        })
     }
 }
