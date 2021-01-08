@@ -18,6 +18,11 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
 import {uploadPic} from '../store/actions/data'
+import {logout} from '../store/actions/user'
+import { Keyboard, KeyboardReturn } from '@material-ui/icons'
+import EditDetail  from './edit'
+
+
 
 const styles = (theme) => ({
   paper: {
@@ -72,6 +77,7 @@ class Profile extends Component {
 
   handleImageChange = (event) => {
     const image = event.target.files[0]
+    console.log(image)
     //send to server
 
     const formData = new FormData();
@@ -83,8 +89,14 @@ class Profile extends Component {
 
   handleEditPicture = () => {
     const fileInput = document.getElementById('imageInput')
+  
     fileInput.click()
 
+  }
+
+  handleLogout = () => {
+    this.props.logout()
+    this.forceUpdate()
   }
 
     componentDidMount() {
@@ -133,8 +145,9 @@ class Profile extends Component {
                           <LocationOn color="primary"  />
                           <span>{data && data.credentials.location}</span>
                           <h1>hey</h1>
+                         
                           <hr />
-                          </div>
+                          </div> 
   
                       )}
                       {data && data.credentials.website && (
@@ -149,6 +162,12 @@ class Profile extends Component {
                       <CalendarToday color="primary" /> {' '}
                       <span>Joined {dayjs(data && data.credentials.createdAt).format('MMM YYYY')}</span>
                   </div>
+                  <Tooltip title="logout" placement="top">
+                    <IconButton onClick={this.handleLogout}>
+                      <KeyboardReturn color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                  <EditDetail />
               </div>
           </Paper>
                 </React.Fragment>
@@ -176,9 +195,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         fetch: () => dispatch(fetchData()),
-        upload : (formData) => dispatch(uploadPic(formData))
+        upload : (formData) => dispatch(uploadPic(formData)),
+        logout: () => dispatch(logout())
     }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Profile))
-

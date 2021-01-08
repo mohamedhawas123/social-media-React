@@ -55,3 +55,16 @@ export const uploadPic = (formData) => {
         })
     }
 }
+
+export const editDetail = (userDetail) => {
+    return dispatch => {
+        dispatch(dataStart())
+        instance.post('/user',userDetail )
+        .then(() => {
+            dispatch(fetchData())
+        })
+        .catch(err => {
+            dispatch(dataFail(err))
+        })
+    }
+}
