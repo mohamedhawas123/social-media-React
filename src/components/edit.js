@@ -15,7 +15,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import TextField from '@material-ui/core/TextField'
 
 const styles = (theme) => ({
-    ...theme
+    ...theme.spreadThis,
 })
 
 
@@ -29,7 +29,36 @@ class EditDetail extends Component {
         open: false
     }
 
+       
     
+    componentDidMount() {
+        const {credentials} = this.props.data
+        this.mapUserDetail(credentials)
+        
+    }
+
+
+    handleSubmit = () => {
+        const{bio, website, location} = this.state
+        const userDetail = {
+            bio: bio,
+            website: website,
+            location: location,
+
+        }
+        this.props.sendData(userDetail)
+        this.handleClose()
+        
+    }
+
+
+    mapUserDetail = (credentials) => {
+        this.setState({
+            bio: credentials.bio ? credentials.bio : '',
+            website: credentials.website ? credentials.website : '',
+            location: credentials.location ? credentials.location : '',
+        })
+    }
 
     handleOpen = () => {
         this.setState({open: true})
@@ -44,24 +73,8 @@ class EditDetail extends Component {
         
     }
 
-    handleSubmit() {
-        
-    }
-
+ 
     
-    componentDidUpdate() {
-        const {credentials} = this.props.data
-        this.mapUserDetail(credentials)
-        
-    }
-
-    mapUserDetail = (credentials) => {
-        this.setState({
-            bio: credentials.bio ? credentials.bio : '',
-            website: credentials.website ? credentials.website : '',
-            location: credentials.location ? credentials.location : '',
-        })
-    }
 
 
 
@@ -137,6 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        sendData: (userData) => dispatch(editDetail(userData))
 
     }
 }

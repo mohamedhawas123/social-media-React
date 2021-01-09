@@ -11,7 +11,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import jwtDecode from 'jwt-decode'
 import AuthRoute from './utils/authRoute'
-
+import {connect} from 'react-redux'
 
 
 const theme = createMuiTheme({
@@ -74,5 +74,7 @@ function App() {
     </MuiThemeProvider>
   );
 }
+
+
 
 export default App;

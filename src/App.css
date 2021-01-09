@@ -14,7 +14,10 @@ body {
 
 .nav-container {
   margin: auto;
-  
+}
+
+.nav-container svg {
+  color: #fff;
 }
 
 a {

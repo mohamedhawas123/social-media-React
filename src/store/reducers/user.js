@@ -5,6 +5,7 @@ import * as actionTypes from '../actions/actionTypy'
 
 const initualState= {
     token: null,
+    authenticated: true,
     error: null, 
     loading: false
 }
@@ -12,13 +13,15 @@ const initualState= {
 const authStart = (state, action) => {
     return updateObj(state, {
         loading: true,
-        error: null
+        error: null,
+        authenticated: true
     } )
 }
 
 const authSucess = (state, action) => {
     return updateObj(state, {
-        token: action.token
+        token: action.token,
+        authenticated: true
     })
 }
 

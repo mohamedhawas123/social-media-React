@@ -68,3 +68,17 @@ export const editDetail = (userDetail) => {
         })
     }
 }
+
+
+export const likescream = () => {
+    return dispatch => {
+        instance.post(`/scream/${screamId}/like`)
+        .then(res => {
+            dispatch()
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(dataFail(err))
+        })
+    }
+}

@@ -43,10 +43,10 @@ export const authLogin = (email, password) => {
         axios.post('/login', userData )
         .then(res => {
             const IdToken = res.data.token
-            console.log(res.data)
+            console.log(res.data.token)
             localStorage.setItem('IdToken', `Bearer ${res.data.token}`);
             dispatch(Auth_Sucess(IdToken))
-            this.props.history.push('/')
+            
         })
        
         .catch(err => {
