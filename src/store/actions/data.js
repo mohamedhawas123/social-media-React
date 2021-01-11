@@ -3,20 +3,20 @@ import React from 'react'
 import * as actionTypes from './actionTypy'
 import { instance } from './token'
 
-const dataStart = () => {
+export const dataStart = () => {
     return {
         type: actionTypes.DATA_START
     }
 }
 
-const dataSucess = data => {
+export const dataSucess = data => {
     return {
         type: actionTypes.DATA_SUCESS,
         data
     }
 }
 
-const dataFail = error => {
+export const dataFail = error => {
     return {
         type: actionTypes.DATA_FAIL,
         error: error
@@ -69,16 +69,3 @@ export const editDetail = (userDetail) => {
     }
 }
 
-
-export const likescream = () => {
-    return dispatch => {
-        instance.post(`/scream/${screamId}/like`)
-        .then(res => {
-            dispatch()
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch(dataFail(err))
-        })
-    }
-}

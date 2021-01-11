@@ -1,7 +1,8 @@
 import React from 'react'
 import * as actionType from './actionTypy'
 import axios from 'axios'
-
+import { instance } from './token'
+import {dataStart, dataFail } from './data'
 
 export const Auth_start = () => {
     return {
@@ -13,6 +14,13 @@ export const Auth_Sucess = (token) => {
     return {
         type: actionType.AUTH_SUCCESS,
         token: token
+    }
+}
+
+const dataSucess = data => {
+    return {
+        type: actionType.DATA_SUCESS,
+        data
     }
 }
 
@@ -30,6 +38,23 @@ export const logout= () => {
     }
 }
 
+export const fetchData = () => {
+    return dispatch => {
+        const token = localStorage.getItem("IdToken")
+        dispatch(dataStart())
+        instance.get("/user")
+        .then(res => {
+            console.log(res.data)
+            dispatch(dataSucess(res.data))
+            
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(dataFail(err))
+        })
+
+    }
+}
 
 
 export const authLogin = (email, password) => {
@@ -46,6 +71,7 @@ export const authLogin = (email, password) => {
             console.log(res.data.token)
             localStorage.setItem('IdToken', `Bearer ${res.data.token}`);
             dispatch(Auth_Sucess(IdToken))
+            dispatch(fetchData())
             
         })
        

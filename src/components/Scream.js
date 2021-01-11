@@ -7,6 +7,13 @@ import Typorgraphy from '@material-ui/core/Typography'
 import {Link} from 'react-router-dom'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import {connect } from 'react-redux'
+import {likeScream , unLikeScream} from '../store/actions/like'
+import ChatIcon from '@material-ui/icons/Chat'
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit'
+import Tooltip from '@material-ui/core/Tooltip'
+
 
 const styles = {
     card: {
@@ -27,6 +34,21 @@ const styles = {
 }
 
 class Scream extends Component {
+
+
+    likedScream = () => {
+        if(this.props.likes && this.props.likes.find(like => like.screamId ===this.props.scream.screemId))
+        return true
+        else return false
+    }
+    likeScream = () => {
+        this.props.like(this.props.scream.screemId)
+    }
+
+    unlikeScream = () => {
+        this.props.unlike(this.props.scream.screemId)
+    }
+
     render() {
         dayjs.extend(relativeTime)
         const {classes} = this.props
@@ -39,6 +61,13 @@ class Scream extends Component {
                     <Typorgraphy variant="h5" component={Link} to={`/users/${userHandle}`} color="primay"  >{userHandle }</Typorgraphy>
                     <Typorgraphy variant="body2" color="textSecondary">{dayjs(createAt).fromNow()}</Typorgraphy>
                     <Typorgraphy variant="body1">{body}</Typorgraphy>
+                    {likeButton}
+                    <span>{likeCount} likes </span>
+                    <Tooltip title="comment" placement="top">
+                    <IconButton >
+                      <ChatIcon color = "primary" />
+                    </IconButton>
+                  </Tooltip>
                 </CardContent>
             </Card>
 
@@ -47,4 +76,17 @@ class Scream extends Component {
     }
 }
 
-export default withStyles(styles)(Scream)
+const mapStateToProps = (state) =>{
+    return {
+        likes: state.data.data.likes
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        like: (screamId) => dispatch(likeScream(screamId)),
+        unlike : (screamId) => dispatch(unLikeScream(screamId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Scream))

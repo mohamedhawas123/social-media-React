@@ -25,6 +25,8 @@ const dataSucess = (state, action) => {
     })
 }
 
+
+
 const dataFail = (state, action) => {
     return updateObj(state, {
         loading: false,
@@ -38,6 +40,13 @@ const reducer = (state =initalstate, action ) => {
         case actionType.DATA_START: return dataStart(state, action)
         case actionType.DATA_SUCESS: return dataSucess(state, action)
         case actionType.DATA_FAIL: return dataFail(state, action)
+        case actionType.UNLIKE_SUCESS:
+        case actionType.LIKE_SUCESS:
+            let index = state.data.findIndex( (scream) => scream.screamId === action.payload.sceamId)
+            state.data[index] = action.payload
+            return {
+                ...state
+            }
         default:
             return state
 

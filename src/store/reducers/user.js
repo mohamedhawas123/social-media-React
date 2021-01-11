@@ -7,7 +7,8 @@ const initualState= {
     token: null,
     authenticated: true,
     error: null, 
-    loading: false
+    loading: false,
+    data: {}
 }
 
 const authStart = (state, action) => {
@@ -21,9 +22,12 @@ const authStart = (state, action) => {
 const authSucess = (state, action) => {
     return updateObj(state, {
         token: action.token,
-        authenticated: true
+        authenticated: true,
+        data: action.data
     })
 }
+
+
 
 
 const authFail = (state, action) => {
@@ -37,6 +41,21 @@ const reducer = (state=initualState, action) => {
         case actionTypes.AUTH_START: return authStart(state, action)
         case actionTypes.AUTH_SUCCESS: return authSucess(state, action)
         case actionTypes.AUTH_FAIL: return authFail(state, action)
+        case actionTypes.LIKE_SUCESS: return {
+            ...state, 
+            likes: [
+                ...state.data.likes, {
+                    userHandle: state.credentials.handle,
+                    screamId: action.payload.screamId
+                }
+
+            ]
+        }
+        case actionTypes.UNLIKE_SUCESS: return{
+            ...state, 
+                likes:  state.data.likes.filter(like => like.screamId === action.payload.screamId)
+            
+        }
         default:
             return state
     }
