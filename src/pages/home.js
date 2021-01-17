@@ -5,6 +5,9 @@ import Scream from '../components/Scream'
 import {fetchData} from '../store/actions/data'
 import {connect} from 'react-redux'
 import Profile from '../components/profile'
+import {fetchSCream} from '../store/actions/sceam'
+
+
 
 class Home extends Component {
 
@@ -13,12 +16,8 @@ class Home extends Component {
     }
 
     componentDidMount(){
-        axios.get('/screems')
-        .then(res => {
-            this.setState({screams: res.data})
-        })
-        .catch(err => console.log(err))
-
+        
+        this.props.scream()
         this.props.fetch()
 
 
@@ -27,10 +26,10 @@ class Home extends Component {
     render() {
         console.log(this.props.data)
       
-        let recentScreamsMarkup = this.state.screams ? (
-            this.state.screams.map(post => <Scream key={post.screemId} scream={post} />)
+        let recentScreamsMarkup = this.props.screams ? (
+            this.props.screams.map(post => <Scream key={post.screemId} scream={post} />)
         ): <p>Loading...</p>
-        console.log(this.state.screams)
+        console.log(this.props.screams)
         return (
            <Grid container spacing={16} >
                <Grid item sm={8} xs={12}>
@@ -47,13 +46,15 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        data: state.data.data
+        data: state.data.data,
+        screams: state.data.screams
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetch: () => dispatch(fetchData())
+        fetch: () => dispatch(fetchData()),
+        scream: () => dispatch(fetchSCream())
     }
 }
 

@@ -13,6 +13,9 @@ import ChatIcon from '@material-ui/icons/Chat'
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
+
 
 
 const styles = {
@@ -42,18 +45,54 @@ class Scream extends Component {
         else return false
     }
     likeScream = () => {
-        this.props.like(this.props.scream.screemId)
+        this.props.like(this.props.scream.screemId, this.props.token)
     }
 
     unlikeScream = () => {
         this.props.unlike(this.props.scream.screemId)
     }
 
+    
+    
     render() {
         dayjs.extend(relativeTime)
         const {classes} = this.props
         const {userImage, body, commentCount, createAt, likeCount, screemId, userHandle} = this.props.scream
         console.log(this.props.scream)
+
+        const likeButton = !this.props.authen ? (
+            <Tooltip title="like">
+            <IconButton >
+                <Link to="/login">
+                    <FavoriteBorder color="primary" />
+                </Link>
+              
+            </IconButton>
+          </Tooltip>
+        
+            ): (
+                this.likedScream() ? (
+                    <Tooltip title="Undo like" onClick={this.unlikeScream} >
+                    <IconButton >
+                        
+                        <FavoriteIcon color="primary" />
+                        
+                      
+                    </IconButton>
+                  </Tooltip>
+                ): (
+                    <Tooltip title="like" onClick={this.likeScream} >
+                    <IconButton >
+                        
+                        <FavoriteBorder color="primary" />
+                        
+                      
+                    </IconButton>
+                  </Tooltip>
+                )
+            );
+
+
         return (
             <Card className={classes.card} >
                 <CardMedia image={userImage} title="Profile image" className={classes.image} />
@@ -78,13 +117,15 @@ class Scream extends Component {
 
 const mapStateToProps = (state) =>{
     return {
-        likes: state.data.data.likes
+        likes: state.data.data.likes,
+        authen: state.user.authenticated,
+        state: state.user.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        like: (screamId) => dispatch(likeScream(screamId)),
+        like: (screamId, getState) => dispatch(likeScream(screamId, getState)),
         unlike : (screamId) => dispatch(unLikeScream(screamId))
     }
 }

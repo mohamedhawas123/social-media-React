@@ -1,7 +1,7 @@
+import axios from 'axios'
 import React from 'react'
 import * as actionTypes from './actionTypy'
 import { instance } from './token'
-
 
 
 const likeStart = () => {
@@ -33,11 +33,15 @@ const likeFail = (err) => {
     }
 }
 
-export const likeScream = (screamId) => {
+export const likeScream = (screamId, getState) => {
     return dispatch => {
+        const token = getState
         dispatch(likeStart())
-        instance.get(`/scream/${screamId}/like`)
+        instance.get(`/scream/${screamId}/like`, { headers: {"Authorization" : `Bearer ${token}`} })
+        
         .then(res => {
+            console.log(res)
+           
             dispatch(likeSucess(res.data))
         })
         .catch(err => {
@@ -51,7 +55,9 @@ export const unLikeScream = (screamId) => {
     return dispatch => {
         dispatch(likeStart())
         instance.get(`/scream/${screamId}/unlike`)
+        
         .then(res => {
+            
             dispatch(unlikeSucess(res.data))
         })
         .catch(err => {

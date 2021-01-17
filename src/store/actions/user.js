@@ -4,6 +4,9 @@ import axios from 'axios'
 import { instance } from './token'
 import {dataStart, dataFail } from './data'
 
+
+
+
 export const Auth_start = () => {
     return {
         type: actionType.AUTH_START
@@ -20,7 +23,7 @@ export const Auth_Sucess = (token) => {
 const dataSucess = data => {
     return {
         type: actionType.DATA_SUCESS,
-        data
+        data: data
     }
 }
 
@@ -42,7 +45,10 @@ export const fetchData = () => {
     return dispatch => {
         const token = localStorage.getItem("IdToken")
         dispatch(dataStart())
-        instance.get("/user")
+        axios.get("/user", {headers: {
+            Authorization: token
+        }})
+        
         .then(res => {
             console.log(res.data)
             dispatch(dataSucess(res.data))
@@ -63,13 +69,14 @@ export const authLogin = (email, password) => {
             email: email,
             password: password
         }
-        console.log(userData)
+       
         dispatch(Auth_start)
         axios.post('/login', userData )
         .then(res => {
             const IdToken = res.data.token
             console.log(res.data.token)
             localStorage.setItem('IdToken', `Bearer ${res.data.token}`);
+            axios.defaults.headers.common['Authorization'] = IdToken;
             dispatch(Auth_Sucess(IdToken))
             dispatch(fetchData())
             
@@ -107,6 +114,7 @@ export const SignUP = (email, password, confirmPassword, handle) => {
             const IdToken = res.data.token
             console.log(res.data)
             localStorage.setItem('IdToken', `Bearer ${res.data.token}`);
+            axios.defaults.headers.common['Authorization'] = IdToken;
             dispatch(Auth_Sucess(IdToken))
             this.props.history.push('/')
         })

@@ -16,3 +16,8 @@ export const LIKE_SUCESS = 'LIKE_SUCESS'
 export const UNLIKE_SUCESS = 'UNLIKE_SUCESS'
 
 export const LIKE_FAIL = 'LIKE_FAIL'
+
+
+export const SCREAM_START = 'SCREAM_START';
+export const SCREAM_SUCESS = 'SCREAM_SUCESS'
+export const SCREAM_FAIL = 'SCREAM_FAIL'

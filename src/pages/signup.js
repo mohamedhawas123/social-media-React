@@ -67,6 +67,7 @@ class signup extends Component {
         const {email, password, confirmPassword, handle} =  this.state
         e.preventDefault()
         this.props.signup(email, password, confirmPassword, handle)
+        this.props.history.push('/')
         
         
     }
