@@ -61,6 +61,14 @@ const screamFail = (state, action) => {
     })
 }
 
+const deleteScream = (state, action) => {
+    const index = state.screams.findIndex(scream => scream.screamId === action.payload)
+    state.screams.splice(index, 1);
+    return {
+        ...state
+    }
+}
+
 
 const reducer = (state =initalstate, action ) => {
     switch(action.type) {
@@ -70,6 +78,7 @@ const reducer = (state =initalstate, action ) => {
         case actionType.SCREAM_START: return screamStart(state, action)
         case actionType.SCREAM_SUCESS: return screamSucess(state, action)
         case actionType.SCREAM_FAIL: return screamFail(state, action)
+        case actionType.DELETE_SUCESS: return deleteScream(state, action)
         case actionType.UNLIKE_SUCESS:
         case actionType.LIKE_SUCESS:
             //net to get the screamid from scream which is not in redux yet

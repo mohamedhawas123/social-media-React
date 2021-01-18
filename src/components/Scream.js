@@ -15,13 +15,14 @@ import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
-
+import DeleteScream from './deleteScream'
 
 
 const styles = {
     card: {
         display: 'flex',
         marginBotttom: 20,
+        position: 'relative'
 
     },
     image: {
@@ -92,10 +93,10 @@ class Scream extends Component {
                 )
             );
 
-            const deleteButton = this.props.authen && userHandle  === this.props.cred ? (
-                <DeleteScream screamId={screamId} />
+           const deleteButton =  //this.props.authen && userHandle  === this.props.cred ? (
+                <DeleteScream screamId={this.props.scream.screemId} />
 
-            ): null
+           // ): null
 
 
         return (
@@ -132,7 +133,7 @@ const mapStateToProps = (state) =>{
         likes: state.data.data.likes,
         authen: state.user.authenticated,
         state: state.user.token,
-        cred : state.data.credentials.handle
+       // cred : state.data.data.credentials.handle
     }
 }
 
