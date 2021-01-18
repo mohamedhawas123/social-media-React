@@ -92,14 +92,26 @@ class Scream extends Component {
                 )
             );
 
+            const deleteButton = this.props.authen && userHandle  === this.props.cred ? (
+                <DeleteScream screamId={screamId} />
+
+            ): null
+
 
         return (
             <Card className={classes.card} >
                 <CardMedia image={userImage} title="Profile image" className={classes.image} />
                 <CardContent className={classes.content} >
-                    <Typorgraphy variant="h5" component={Link} to={`/users/${userHandle}`} color="primay"  >{userHandle }</Typorgraphy>
-                    <Typorgraphy variant="body2" color="textSecondary">{dayjs(createAt).fromNow()}</Typorgraphy>
-                    <Typorgraphy variant="body1">{body}</Typorgraphy>
+                    <Typorgraphy variant="h5" component={Link} to={`/users/${userHandle}`} color="primay"  >
+                        {userHandle }
+                        </Typorgraphy>
+                        {deleteButton}
+                    <Typorgraphy variant="body2" color="textSecondary">
+                        {dayjs(createAt).fromNow()}
+                        </Typorgraphy>
+                    <Typorgraphy variant="body1">
+                        {body}
+                        </Typorgraphy>
                     {likeButton}
                     <span>{likeCount} likes </span>
                     <Tooltip title="comment" placement="top">
@@ -119,7 +131,8 @@ const mapStateToProps = (state) =>{
     return {
         likes: state.data.data.likes,
         authen: state.user.authenticated,
-        state: state.user.token
+        state: state.user.token,
+        cred : state.data.credentials.handle
     }
 }
 

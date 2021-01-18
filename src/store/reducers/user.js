@@ -6,7 +6,7 @@ import { unLikeScream } from '../actions/like'
 
 const initualState= {
     token: null,
-    authenticated: true,
+    authenticated: false,
     error: null, 
     loading: false,
     data: [],

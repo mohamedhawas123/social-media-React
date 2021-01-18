@@ -21,3 +21,8 @@ export const LIKE_FAIL = 'LIKE_FAIL'
 export const SCREAM_START = 'SCREAM_START';
 export const SCREAM_SUCESS = 'SCREAM_SUCESS'
 export const SCREAM_FAIL = 'SCREAM_FAIL'
+
+
+export const DELETE_START = 'DELETE_START';
+export const DELETE_SUCESS = 'DELETE_SUCESS'
+export const DELETE_FAIL = 'DELETE_FAIL'
