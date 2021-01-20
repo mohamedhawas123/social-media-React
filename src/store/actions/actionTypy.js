@@ -26,3 +26,8 @@ export const SCREAM_FAIL = 'SCREAM_FAIL'
 export const DELETE_START = 'DELETE_START';
 export const DELETE_SUCESS = 'DELETE_SUCESS'
 export const DELETE_FAIL = 'DELETE_FAIL'
+
+
+export const POST_START = 'POST_START';
+export const POST_SUCESS = 'POST_SUCESS'
+export const POST_FAIL = 'POST_FAIL'

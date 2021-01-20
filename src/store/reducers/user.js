@@ -6,7 +6,7 @@ import { unLikeScream } from '../actions/like'
 
 const initualState= {
     token: null,
-    authenticated: false,
+    authenticated: true,
     error: null, 
     loading: false,
     data: [],
@@ -40,7 +40,7 @@ const dataSucess = (state, action) => {
 const like = (state, action) => {
     return {
         likes: [
-            ...state.data.likes,
+            ...state,
             {
                 screamId: action.payload.screamId
             }

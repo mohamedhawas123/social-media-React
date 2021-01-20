@@ -9,7 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import AddIcon from '@material-ui/icons/Add'
 import HomeIcon from '@material-ui/icons/Home'
 import Notifications from '@material-ui/icons/Notifications'
-
+import PostScream from './postScream'
 
 
 class Navbar extends Component {
@@ -20,6 +20,7 @@ class Navbar extends Component {
                 <Toolbar className="nav-container" >
                     {authen ? (
                         <React.Fragment>
+                            <PostScream />
                             <Tooltip title="Post a scream">
                                 <IconButton>
                                     <AddIcon color="primary" />

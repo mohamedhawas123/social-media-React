@@ -33,14 +33,14 @@ const likeFail = (err) => {
     }
 }
 
-export const likeScream = (screamId, getState) => {
+export const likeScream = (screamId) => {
     return dispatch => {
-        const token = getState
+       
         dispatch(likeStart())
-        instance.get(`/scream/${screamId}/like`, { headers: {"Authorization" : `Bearer ${token}`} })
+        instance.get(`/scream/${screamId}/like`)
         
         .then(res => {
-            console.log(res)
+         
            
             dispatch(likeSucess(res.data))
         })
