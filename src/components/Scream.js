@@ -16,6 +16,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
 import DeleteScream from './deleteScream'
+import ScreamDialog from './screamDialog'
 
 
 const styles = {
@@ -119,7 +120,8 @@ class Scream extends Component {
                     <IconButton >
                       <ChatIcon color = "primary" />
                     </IconButton>
-                  </Tooltip>
+                  </Tooltip> <span>{commentCount} comments</span>
+                  <ScreamDialog screamId={screemId} userHandle={userHandle}  />
                 </CardContent>
             </Card>
 

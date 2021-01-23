@@ -21,12 +21,7 @@ class Navbar extends Component {
                     {authen ? (
                         <React.Fragment>
                             <PostScream />
-                            <Tooltip title="Post a scream">
-                                <IconButton>
-                                    <AddIcon color="primary" />
-                                </IconButton>
-
-                            </Tooltip>
+                          
 
                             <Link to="/">
                             <Tooltip title="Home">

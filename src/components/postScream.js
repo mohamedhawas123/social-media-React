@@ -54,6 +54,15 @@ class PostScream extends Component {
         this.setState({open: false})
     }
 
+    handleChange = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log("body is" + this.state.body)
+        this.props.post({body: this.state.body})
+    }
+
     render(){
         const {classes} = this.props
         return(
@@ -84,7 +93,7 @@ class PostScream extends Component {
                         rows="3"
                         placeholder="Scream"
                         className="classes.textField"
-                        onChange={this.handlChange}
+                        onChange={this.handleChange}
                         fullWidth />
 
                         <Button type="submit" variant="contained" color="primary"

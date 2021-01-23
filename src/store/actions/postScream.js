@@ -11,7 +11,7 @@ const postStart = () => {
 const postSucess = (post) => {
     return{
         type: actionType.POST_SUCESS,
-        post: post
+        post
     }
 }
 
