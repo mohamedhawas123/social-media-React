@@ -120,8 +120,13 @@ const reducer = (state =initalstate, action ) => {
         case actionType.UNLIKE_SUCESS:
         case actionType.LIKE_SUCESS:
             //net to get the screamid from scream which is not in redux yet
-            let index = state.screams.findIndex( (scream) => scream.screamId === action.payload.screamId)
-            state.screams[index] = action.payload
+            let index = state.screams.findIndex(
+                (scream) => scream.screamId === action.payload.screamId
+                );
+                state.screams[index] = action.payload;
+                if (state.scream.screamId === action.payload.screamId) {
+                state.scream = action.payload;
+                }
             return {
                 ...state
             }

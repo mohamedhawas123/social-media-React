@@ -41,6 +41,7 @@ export const logout= () => {
     }
 }
 
+
 export const fetchData = () => {
     return dispatch => {
         const token = localStorage.getItem("IdToken")

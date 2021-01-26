@@ -1,3 +1,4 @@
+import axios from 'axios'
 import * as actionType from './actionTypy'
 import {instance} from './token'
 
@@ -24,10 +25,10 @@ const postFaill = (error) => {
 }
 
 
-export const postSceam = (scream) => {
+export const postSceam = (scream, token) => {
     return dispatch => {
         dispatch(postStart())
-        instance.post('/screem', scream)
+        axios.post('/screem', scream,  {headers: {"Authorization" : `Bearer ${token}`}})
         .then(res => {
             dispatch(postSucess(res.data))
         })

@@ -29,7 +29,7 @@ export const fetchData = () => {
     return dispatch => {
         const token = localStorage.getItem("IdToken")
         dispatch(dataStart())
-        instance.get("/user")
+        axios.get("/user", {headers: {"Authorization": token}})
         .then(res => {
             console.log(res.data)
             dispatch(dataSucess(res.data))
@@ -43,12 +43,13 @@ export const fetchData = () => {
     }
 }
 
-export const uploadPic = (formData) => {
+export const uploadPic = (formData, token) => {
     return dispatch => {
         dispatch(dataStart())
-        instance.post('/user/image', formData)
+       
+        axios.post('/user/image', formData, {headers:{"Authorization": `Bearer ${token}`}})
         .then(res => {
-            dispatch(fetchData())
+            dispatch(fetchData(token))
         })
         .catch(err => {
             dispatch(dataFail(err))
@@ -56,10 +57,10 @@ export const uploadPic = (formData) => {
     }
 }
 
-export const editDetail = (userDetail) => {
+export const editDetail = (userDetail, token) => {
     return dispatch => {
         dispatch(dataStart())
-        instance.post('/user',userDetail )
+        axios.post('/user',userDetail, {headers: {"Authorization" : `Bearer ${token}`}} )
         .then(() => {
             dispatch(fetchData())
         })

@@ -46,7 +46,9 @@ class DeleteScream extends Component {
     }
 
     deleteSCream = () => {
-        this.props.delete(this.props.screamId)
+        this.props.delete(this.props.screamId, this.props.token)
+        console.log(this.props.screamId)
+        console.log(this.props.token)
         this.setState({open: false})
     }
 
@@ -79,8 +81,14 @@ class DeleteScream extends Component {
 
 const mapDispatchToProps =(dispatch) => {
     return {
-        delete: (screamId) => dispatch(deleteSCream(screamId))
+        delete: (screamId, token) => dispatch(deleteSCream(screamId, token))
     }
 }
 
-export default connect(null, mapDispatchToProps)(DeleteScream)
+const mapStateToProps = (state) => {
+    return {
+        token: state.user.token
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteScream)

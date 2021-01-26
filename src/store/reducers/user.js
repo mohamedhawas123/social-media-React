@@ -39,15 +39,14 @@ const dataSucess = (state, action) => {
 
 const like = (state, action) => {
     return {
+        ...state, 
         likes: [
-            ...state,
+            ...state.likes,
             {
                 screamId: action.payload.screamId
             }
         ]
     }
-        
-    
 }
 
 const unlike = (state, action) => {

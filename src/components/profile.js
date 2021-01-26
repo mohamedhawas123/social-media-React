@@ -83,7 +83,7 @@ class Profile extends Component {
     const formData = new FormData();
     formData.append('image', image, image.name)
     console.log(formData)
-    this.props.upload(formData)
+    this.props.upload(formData, this.props.token)
 
   }
 
@@ -190,14 +190,15 @@ const mapStateToProps = (state) => {
     return {
         data: state.data.data,
         loading: state.data.loading,
-        error: state.data.error
+        error: state.data.error,
+        token: state.user.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         fetch: () => dispatch(fetchData()),
-        upload : (formData) => dispatch(uploadPic(formData)),
+        upload : (formData, token) => dispatch(uploadPic(formData, token)),
         logout: () => dispatch(logout())
     }
 }

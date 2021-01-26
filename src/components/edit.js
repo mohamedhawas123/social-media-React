@@ -46,7 +46,8 @@ class EditDetail extends Component {
             location: location,
 
         }
-        this.props.sendData(userDetail)
+        this.props.sendData(userDetail, this.props.token)
+        console.log(this.props.token)
         this.handleClose()
         
     }
@@ -143,14 +144,15 @@ class EditDetail extends Component {
 
 const mapStateToProps = state => {
     return {
-        data: state.data.data
+        data: state.data.data,
+        token: state.user.token
 
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendData: (userData) => dispatch(editDetail(userData))
+        sendData: (userData, token) => dispatch(editDetail(userData, token))
 
     }
 }

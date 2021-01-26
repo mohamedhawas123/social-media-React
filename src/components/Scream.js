@@ -47,11 +47,11 @@ class Scream extends Component {
         else return false
     }
     likeScream = () => {
-        this.props.like(this.props.scream.screemId)
+        this.props.like(this.props.scream.screemId, this.props.token)
     }
 
     unlikeScream = () => {
-        this.props.unlike(this.props.scream.screemId)
+        this.props.unlike(this.props.scream.screemId, this.props.token)
     }
 
     
@@ -134,15 +134,16 @@ const mapStateToProps = (state) =>{
     return {
         likes: state.data.data.likes,
         authen: state.user.authenticated,
-        state: state.user.token,
+       
+        token: state.user.token
        // cred : state.data.data.credentials.handle
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        like: (screamId) => dispatch(likeScream(screamId)),
-        unlike : (screamId) => dispatch(unLikeScream(screamId))
+        like: (screamId, token) => dispatch(likeScream(screamId, token)),
+        unlike : (screamId, token) => dispatch(unLikeScream(screamId, token))
     }
 }
 

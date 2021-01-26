@@ -33,11 +33,11 @@ const likeFail = (err) => {
     }
 }
 
-export const likeScream = (screamId) => {
+export const likeScream = (screamId, token) => {
     return dispatch => {
        
         dispatch(likeStart())
-        instance.get(`/scream/${screamId}/like`)
+        axios.get(`/scream/${screamId}/like`, {headers: {"Authorization" : `Bearer ${token}`}})
         
         .then(res => {
          
@@ -51,10 +51,10 @@ export const likeScream = (screamId) => {
     }
 }
 
-export const unLikeScream = (screamId) => {
+export const unLikeScream = (screamId, token) => {
     return dispatch => {
         dispatch(likeStart())
-        instance.get(`/scream/${screamId}/unlike`)
+        axios.get(`/scream/${screamId}/unlike`,  {headers: {"Authorization" : `Bearer ${token}`}})
         
         .then(res => {
             

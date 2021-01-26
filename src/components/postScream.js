@@ -60,7 +60,8 @@ class PostScream extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         console.log("body is" + this.state.body)
-        this.props.post({body: this.state.body})
+        this.props.post({body: this.state.body}, this.props.token)
+        this.handleClose()
     }
 
     render(){
@@ -118,13 +119,14 @@ class PostScream extends Component {
 const mapStateToProps = state => {
     return {
         data: state.data.screams,
-        loading: state.data.loading
+        loading: state.data.loading,
+        token: state.user.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        post: (scream) =>  dispatch(postSceam(scream))
+        post: (scream, token) =>  dispatch(postSceam(scream, token))
     }
 }
 
