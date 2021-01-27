@@ -19,6 +19,8 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import UnfoldMore from '@material-ui/icons/UnfoldMore'
 import {fetchoneSCream} from '../store/actions/getScream'
+import Comment from './comment'
+
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -43,6 +45,11 @@ const styles = theme => ({
         textAlign: 'center',
         marginTop: 50,
         marginBottom: 50
+    },
+    vis:{
+        width: '100%',
+        borderBottom: '1px solid rgba(0,0,0,0,1)',
+        marginBottom: 20
     }
 
 })
@@ -67,7 +74,7 @@ class ScreamDialog extends Component {
 
     render() {
         const {classes} = this.props
-        const  {userHandle, body, createdAt, userImage} = this.props.scream
+        const  {userHandle, body, createdAt, userImage, commentCount, comments} = this.props.scream
         const dialogMarkUP = this.props.loading ? (
             <div className={classes.spinner} >
                 <CircularProgress size={200} />
@@ -93,8 +100,12 @@ class ScreamDialog extends Component {
                     <Typography variant="body1">
                         {body}
                     </Typography>
+
+                  <span>{commentCount} comments </span>
                     
                 </Grid>
+                <hr className={classes.invis} />
+                <Comment comments={comments} />
             </Grid>
         )
 

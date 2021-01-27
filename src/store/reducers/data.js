@@ -8,7 +8,8 @@ const initalstate = {
     error: null,
     loading: false,
     screams: [],
-    scream: {}
+    scream: {},
+    comments: []
 
 }
 
@@ -49,7 +50,8 @@ const screamSucess = (state, action) => {
     return updateObj(state, {
         screams: action.payload,
         error: null,
-        loading: false
+        loading: false,
+        comments: action.payload.comments
     })
 }
 
