@@ -20,6 +20,7 @@ import Typography from '@material-ui/core/Typography'
 import UnfoldMore from '@material-ui/icons/UnfoldMore'
 import {fetchoneSCream} from '../store/actions/getScream'
 import Comment from './comment'
+import CommentForm from './commentForm'
 
 
 const styles = theme => ({
@@ -74,7 +75,7 @@ class ScreamDialog extends Component {
 
     render() {
         const {classes} = this.props
-        const  {userHandle, body, createdAt, userImage, commentCount, comments} = this.props.scream
+        const  {userHandle, body, createdAt, userImage, commentCount, comments, screemId} = this.props.scream
         const dialogMarkUP = this.props.loading ? (
             <div className={classes.spinner} >
                 <CircularProgress size={200} />
@@ -105,6 +106,7 @@ class ScreamDialog extends Component {
                     
                 </Grid>
                 <hr className={classes.invis} />
+                <CommentForm screemId={screemId} />
                 <Comment comments={comments} />
             </Grid>
         )
