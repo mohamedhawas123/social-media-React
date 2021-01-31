@@ -12,6 +12,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import jwtDecode from 'jwt-decode'
 import AuthRoute from './utils/authRoute'
 import {connect} from 'react-redux'
+import user from './pages/user'
 
 
 const theme = createMuiTheme({
@@ -64,7 +65,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <AuthRoute exact  path="/signup" component={Signup} authenticated={authenticated} />
        <AuthRoute exact  path="/login" component={login} authenticated={authenticated} />
-       
+       <Route exact path="/users/:handle" component={user} /> 
        </Switch>
        </div>
       

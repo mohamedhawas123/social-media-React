@@ -39,3 +39,5 @@ export const ONESCREAM_FAIL = 'ONESCREAM_FAIL'
 
 
 export const COMMENT_SUCESS = 'COMMENT_SUCESS'
+
+export const USER_SUCESS = 'USER_SUCESS'

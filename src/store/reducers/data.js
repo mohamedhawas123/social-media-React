@@ -106,8 +106,9 @@ const postScream = (state, action) => {
 }
 
 const submitComment = (state, action) => {
+    console.log(state.scream.comments)
     return updateObj(state, {
-        comments: [action.comment, ...state.data.screem.comments]
+        comments: [action.comment, ...state.scream.comments]
     })
 
     
