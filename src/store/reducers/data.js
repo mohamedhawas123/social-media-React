@@ -114,6 +114,12 @@ const submitComment = (state, action) => {
     
 }
 
+const getData = (state, action) => {
+    return updateObj(state, {
+        screams: action.screams
+    })
+}
+
 
 const reducer = (state =initalstate, action ) => {
     switch(action.type) {
@@ -129,6 +135,7 @@ const reducer = (state =initalstate, action ) => {
         case actionType.DELETE_SUCESS: return deleteScream(state, action)
         case actionType.POST_SUCESS: return postScream(state, action)
         case actionType.COMMENT_SUCESS: return submitComment(state, action)
+        case actionType.USER_SUCESS: return getData(state, action)
         case actionType.UNLIKE_SUCESS:
         case actionType.LIKE_SUCESS:
             //net to get the screamid from scream which is not in redux yet
