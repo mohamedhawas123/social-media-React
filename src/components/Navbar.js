@@ -10,6 +10,8 @@ import AddIcon from '@material-ui/icons/Add'
 import HomeIcon from '@material-ui/icons/Home'
 import Notifications from '@material-ui/icons/Notifications'
 import PostScream from './postScream'
+import Notifications from './notification'
+
 
 
 class Navbar extends Component {
@@ -32,12 +34,9 @@ class Navbar extends Component {
                             </Tooltip>
                             </Link>
 
-                            <Tooltip title="Notifcation">
-                                <IconButton>
-                                    <Notifications color="primary" />
-                                </IconButton>
-
-                            </Tooltip>
+                          
+                            <Notifications  />
+                           
 
                         </React.Fragment>
                     ): (

@@ -63,26 +63,27 @@ const styles = (theme) => ({
   const StaticProfile = (props) => {
       
       const {classes} = props
+      console.log(props)
 
       return (
         <Paper className={classes.paper}>
         <div className={classes.profile}>
             <div className="image-wrapper">
-                <img src={props.scream && props.scream.imageUrl} className="profile-image" alt="profile" />
+                <img src={props.profile && props.profile.imageUrl} className="profile-image" alt="profile" />
                
             </div>
             <hr />
             <div className="profile-detail">
-                <MuilLink component={Link} to={`/users/${props.scream&&props.scream.handle}`} color="primary" variant="h5">
-                    @{props.scream&&props.scream.handle}
+                <MuilLink component={Link} to={`/users/${props.profile&&props.profile.handle}`} color="primary" variant="h5">
+                    @{props.profile&&props.profile.handle}
                 </MuilLink>
                 <h3 />
-                 <Typography variant="body2">{props.scream&&props.scream.bio}</Typography> 
+                 <Typography variant="body2">{props.profile&&props.profile.bio}</Typography> 
                 <hr />
                 
                     <div>
                     <LocationOn color="primary"  />
-                    <span>{props.scream&&props.scream.location}</span>
+                    <span>{props.profile&&props.profile.location}</span>
                     <h1>hey</h1>
                    
                     <hr />
@@ -92,12 +93,12 @@ const styles = (theme) => ({
                
                     <React.Fragment>
                         <LinkIcon color="primary" />
-                        
+                       
                         <hr />
                     </React.Fragment>
             
                 <CalendarToday color="primary" /> {' '}
-                <span>Joined {props.scream&&dayjs( props.scream&&props.scream.createdAt).format('MMM YYYY')}</span>
+                <span>Joined {props.profile&&dayjs( props.profile&&props.profile.createdAt).format('MMM YYYY')}</span>
             </div>
          
         </div>
