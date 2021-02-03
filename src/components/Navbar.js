@@ -10,7 +10,7 @@ import AddIcon from '@material-ui/icons/Add'
 import HomeIcon from '@material-ui/icons/Home'
 import Notifications from '@material-ui/icons/Notifications'
 import PostScream from './postScream'
-import Notifications from './notification'
+import Notification from './notification'
 
 
 

@@ -72,6 +72,11 @@ const reducer = (state=initualState, action) => {
         case actionTypes.DATA_SUCESS: return dataSucess(state, action)
         case actionTypes.LIKE_SUCESS: return like(state, action)
         case actionTypes.UNLIKE_SUCESS: return unlike(state, action)
+        case actionTypes.NOTIFICATION_SUCESS:
+            state.user.data.notifications.forEach(not => not.read= true)
+            return {
+                ...state
+            }
         default:
             return state
     }
