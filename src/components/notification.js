@@ -24,6 +24,17 @@ class Notification extends Component {
         anchorEl : null
     }
 
+    handleOpen = (event) =>{
+        this.setState({anchorEl: event.target})
+    }
+    handleClose = () => {
+        this.setState({anchorEl: null})
+    }
+
+    onMenuOpend = () => {
+        let unreadNotificationsId = this.props.notifications
+    }
+
     render(){
         const notifications = this.props.notifications
         const anchorEl = this.state.anchorEl
@@ -57,6 +68,18 @@ class Notification extends Component {
                 ): (
                     <ChatIcon color={iconColor} style={{marginRight: 10}} />
                 )
+
+                return (
+                    <MenuItem key={not.createdAt} onClick={this.handleClose}>
+                        {icon}
+                        <Typography component={link}
+                        color="default"
+                        variant="body1"
+                        to={`/users/${not.recipient}/scream/${not.screamId}}`}>
+                            {not.sender} {verb} your scream {time}
+                        </Typography>
+                    </MenuItem>
+                )
             })
         ) : (
             <MenuItem onClick={this.handleClose}>
@@ -88,4 +111,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {})(Notification)
+export default connect(mapStateToProps, {markNotificationRead})(Notification)
