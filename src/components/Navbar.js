@@ -35,7 +35,7 @@ class Navbar extends Component {
                             </Link>
 
                           
-                            <Notifications  />
+                            <Notification  />
                            
 
                         </React.Fragment>

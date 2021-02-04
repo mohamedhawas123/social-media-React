@@ -2,20 +2,22 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import {connect} from 'react-redux'
-import dayjs from 'dayjs'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
+import dayjs from 'dayjs'
+import {Link} from 'react-router-dom'
 
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ChatIcon from '@material-ui/icons/Chat'
 import {markNotificationRead} from '../store/actions/notifications'
 import { IconButton } from '@material-ui/core'
-import { relativeTime } from 'dayjs/locale/*'
 
+
+var relativeTime = require('dayjs/plugin/relativeTime')
 
 
 class Notification extends Component {
@@ -33,6 +35,10 @@ class Notification extends Component {
 
     onMenuOpend = () => {
         let unreadNotificationsId = this.props.notifications
+        .filter(not => !not.read)
+        .map(not => not.notificationId)
+    
+    this.props.markNotificationRead(unreadNotificationsId)
     }
 
     render(){
@@ -72,7 +78,7 @@ class Notification extends Component {
                 return (
                     <MenuItem key={not.createdAt} onClick={this.handleClose}>
                         {icon}
-                        <Typography component={link}
+                        <Typography component={Link}
                         color="default"
                         variant="body1"
                         to={`/users/${not.recipient}/scream/${not.screamId}}`}>

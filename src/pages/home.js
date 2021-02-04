@@ -6,7 +6,7 @@ import {fetchData} from '../store/actions/data'
 import {connect} from 'react-redux'
 import Profile from '../components/profile'
 import {fetchSCream} from '../store/actions/sceam'
-
+import ScreamSk from '../utils/skl'
 
 
 class Home extends Component {
@@ -28,7 +28,7 @@ class Home extends Component {
       
         let recentScreamsMarkup = this.props.screams ? (
             this.props.screams.map(post => <Scream key={post.screemId} scream={post} />)
-        ): <p>Loading...</p>
+        ): <ScreamSk />
         console.log(this.props.screams)
         return (
            <Grid container spacing={16} >

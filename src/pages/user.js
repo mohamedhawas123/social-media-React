@@ -6,6 +6,7 @@ import {getUser} from '../store/actions/getuser'
 import axios from 'axios'
 import Scream from '../components/Scream'
 import StaticProfile from '../components/staticprofile'
+import ScreamSk from '../utils/skl'
 
 
 class User extends Component {
@@ -42,7 +43,7 @@ class User extends Component {
                 </Grid>
                 <Grid item sm={4} xs={12}>
                     {this.state.profile === null ? (
-                        <p>loading...</p>
+                        <ScreamSk />
                     ):
                     (<StaticProfile profile={this.state.profile} />)
                     }

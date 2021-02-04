@@ -9,7 +9,7 @@ const notiSucess = (notifications) => {
     }
 }
 
-export const notifications = (notifications, token) => {
+export const markNotificationRead = (notifications, token) => {
     return dispatch => {
         axios.post('/notifications', notifications, {headers: {"Authorization" : `Bearer ${token}`}})
         .then(res =>{
