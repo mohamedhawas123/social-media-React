@@ -35,7 +35,7 @@ class CommentForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.submitcomment(this.props.screemId, {body: this.state.body} ,this.props.token)
+        this.props.submitcomment(this.props.screemId, {body: this.state.body})
         console.log(this.props.screemId)
         this.setState({body: ''})
     }
@@ -88,7 +88,7 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        submitcomment: (screamId, commentData ,token) => dispatch(submitComment(screamId, commentData ,token))
+        submitcomment: (screamId, commentData ) => dispatch(submitComment(screamId, commentData))
     }
 }
 

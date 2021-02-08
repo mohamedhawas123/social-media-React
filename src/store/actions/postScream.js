@@ -28,7 +28,8 @@ const postFaill = (error) => {
 export const postSceam = (scream, token) => {
     return dispatch => {
         dispatch(postStart())
-        axios.post('/screem', scream,  {headers: {"Authorization" : `Bearer ${token}`}})
+        const token = localStorage.getItem("IdToken")
+        axios.post('/screem', scream,  {headers: {"Authorization" :  token}})
         .then(res => {
             dispatch(postSucess(res.data))
         })

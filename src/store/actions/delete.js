@@ -24,6 +24,7 @@ export const deleteSCream = (screamId, token) => {
         
         axios.delete(`/scream/${screamId}`, {headers: {"Authorization" : `Bearer ${token}`}})
         .then(res => {
+            console.log(res.data)
             dispatch(deleteSucess(res.data))
             console.log(token)
         })

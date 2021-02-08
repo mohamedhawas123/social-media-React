@@ -28,6 +28,7 @@ export const dataFail = error => {
 export const fetchData = () => {
     return dispatch => {
         const token = localStorage.getItem("IdToken")
+        
         dispatch(dataStart())
         axios.get("/user", {headers: {"Authorization": token}})
         .then(res => {

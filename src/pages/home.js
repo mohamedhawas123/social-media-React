@@ -28,7 +28,7 @@ class Home extends Component {
       
         let recentScreamsMarkup = this.props.screams ? (
             this.props.screams.map(post => <Scream key={post.screemId} scream={post} />)
-        ): <ScreamSk />
+        ): (<ScreamSk />) 
         console.log(this.props.screams)
         return (
            <Grid container spacing={16} >

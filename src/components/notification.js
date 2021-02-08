@@ -38,7 +38,7 @@ class Notification extends Component {
         .filter(not => !not.read)
         .map(not => not.notificationId)
     
-    this.props.markNotificationRead(unreadNotificationsId)
+    this.props.mark(unreadNotificationsId, this.props.token)
     }
 
     render(){
@@ -81,7 +81,7 @@ class Notification extends Component {
                         <Typography component={Link}
                         color="default"
                         variant="body1"
-                        to={`/users/${not.recipient}/scream/${not.screamId}}`}>
+                        to="/">
                             {not.sender} {verb} your scream {time}
                         </Typography>
                     </MenuItem>
@@ -113,8 +113,15 @@ class Notification extends Component {
 
 const mapStateToProps = state => {
     return {
-        notifications: state.data.data.notifications
+        notifications: state.data.data.notifications,
+        token: state.user.token
     }
 }
 
-export default connect(mapStateToProps, {markNotificationRead})(Notification)
+const mapDispatchToProps = dispatch => {
+    return {
+        mark: (notifications, token) => dispatch(markNotificationRead(notifications, token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps )(Notification)
