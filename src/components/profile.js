@@ -83,7 +83,7 @@ class Profile extends Component {
     const formData = new FormData();
     formData.append('image', image, image.name)
     console.log(formData)
-    this.props.upload(formData, this.props.token)
+    this.props.upload(formData)
 
   }
 
@@ -198,7 +198,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         fetch: () => dispatch(fetchData()),
-        upload : (formData, token) => dispatch(uploadPic(formData, token)),
+        upload : (formData) => dispatch(uploadPic(formData)),
         logout: () => dispatch(logout())
     }
 }
@@ -206,54 +206,3 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Profile))
 
 
-/** 
- * <Paper className={classes.paper}>
-              <div className={classes.profile}>
-                  <div className="image-wrapper">
-                      <img src={data && data.credentials.imageUrl} className="profile-image" alt="profile" />
-                      <input type="file" id="imageInput" hidden="hidden" onChange={this.handleImageChange}  />
-                      <Tooltip title="Edit Profile Picture" placement="top">
-                      <IconButton onClick={this.handleEditPicture} className="button">
-                        <EditIcon color="primary" />
-                      </IconButton>
-                      </Tooltip>
-                  </div>
-                  <hr />
-                  <div className="profile-detail">
-                      <MuilLink component={Link} to={`/users/${data && data.credentials.handle}`} color="primary" variant="h5">
-                          @{data && data.credentials.handle}
-                      </MuilLink>
-                      <h3 />
-                      {data && data.credentials.bio && <Typography variant="body2">{data && data.credentials.bio}</Typography> }
-                      <hr />
-                      {data && data.credentials.location && (
-                          <div>
-                          <LocationOn color="primary"  />
-                          <span>{data && data.credentials.location}</span>
-                          <h1>hey</h1>
-                         
-                          <hr />
-                          </div> 
-  
-                      )}
-                      {data && data.credentials.website && (
-                          <React.Fragment>
-                              <LinkIcon color="primary" />
-                              <a href={data && data.credentials.website} target="_blank" ref="noopener noreferrer">
-                                  {' '}{data && data.credentials.website}
-                              </a>
-                              <hr />
-                          </React.Fragment>
-                      )}
-                      <CalendarToday color="primary" /> {' '}
-                      <span>Joined {dayjs(data && data.credentials.createdAt).format('MMM YYYY')}</span>
-                  </div>
-                  <Tooltip title="logout" placement="top">
-                    <IconButton onClick={this.handleLogout}>
-                      <KeyboardReturn color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                  <EditDetail />
-              </div>
-          </Paper>
- */

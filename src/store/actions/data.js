@@ -44,11 +44,11 @@ export const fetchData = () => {
     }
 }
 
-export const uploadPic = (formData, token) => {
+export const uploadPic = (formData) => {
     return dispatch => {
         dispatch(dataStart())
-       
-        axios.post('/user/image', formData, {headers:{"Authorization": `Bearer ${token}`}})
+        const token = localStorage.getItem("IdToken")
+        axios.post('/user/image', formData, {headers: {"Authorization" :  token}})
         .then(res => {
             dispatch(fetchData(token))
         })
@@ -58,10 +58,11 @@ export const uploadPic = (formData, token) => {
     }
 }
 
-export const editDetail = (userDetail, token) => {
+export const editDetail = (userDetail) => {
     return dispatch => {
         dispatch(dataStart())
-        axios.post('/user',userDetail, {headers: {"Authorization" : `Bearer ${token}`}} )
+        const token = localStorage.getItem("IdToken")
+        axios.post('/user',userDetail, {headers: {"Authorization" :  token}} )
         .then(() => {
             dispatch(fetchData())
         })

@@ -9,9 +9,10 @@ const notiSucess = (notifications) => {
     }
 }
 
-export const markNotificationRead = (notifications, token) => {
+export const markNotificationRead = (notifications) => {
     return dispatch => {
-        axios.post('/notifications', notifications, {headers: {"Authorization" : `Bearer ${token}`}})
+        const token = localStorage.getItem("IdToken")
+        axios.post('/notifications', notifications, {headers: {"Authorization" :  token}})
         .then(res =>{
             dispatch(notiSucess(res.data))
         })

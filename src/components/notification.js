@@ -38,7 +38,7 @@ class Notification extends Component {
         .filter(not => !not.read)
         .map(not => not.notificationId)
     
-    this.props.mark(unreadNotificationsId, this.props.token)
+    this.props.mark(unreadNotificationsId)
     }
 
     render(){
@@ -120,7 +120,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        mark: (notifications, token) => dispatch(markNotificationRead(notifications, token))
+        mark: (notifications) => dispatch(markNotificationRead(notifications))
     }
 }
 

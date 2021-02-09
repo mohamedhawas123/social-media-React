@@ -51,7 +51,7 @@ class Scream extends Component {
     }
 
     unlikeScream = () => {
-        this.props.unlike(this.props.scream.screemId, this.props.token)
+        this.props.unlike(this.props.scream.screemId)
     }
 
     
@@ -143,7 +143,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = dispatch => {
     return {
         like: (screamId) => dispatch(likeScream(screamId)),
-        unlike : (screamId, token) => dispatch(unLikeScream(screamId, token))
+        unlike : (screamId) => dispatch(unLikeScream(screamId))
     }
 }
 

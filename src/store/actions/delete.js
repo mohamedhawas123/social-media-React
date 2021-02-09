@@ -21,8 +21,8 @@ const deleteSucess = (payload) => {
 
 export const deleteSCream = (screamId, token) => {
     return dispatch => {
-        
-        axios.delete(`/scream/${screamId}`, {headers: {"Authorization" : `Bearer ${token}`}})
+        const token = localStorage.getItem("IdToken")
+        axios.delete(`/scream/${screamId}`, {headers: {"Authorization" :  token}})
         .then(res => {
             console.log(res.data)
             dispatch(deleteSucess(res.data))
